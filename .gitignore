@@ -1,0 +1,7 @@
+input/
+output/
+work/
+reference/reference-project/
+.idea/
+__pycache__/
+*.pyc

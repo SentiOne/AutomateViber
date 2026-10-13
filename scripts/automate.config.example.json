@@ -1,0 +1,27 @@
+{
+  "defaultProfile": "default",
+  "defaultHost": "production",
+  "hosts": {
+    "production": {
+      "server": "https://chatbots.sentione.com"
+    },
+    "staging": {
+      "server": "https://staging-chatbots.sentione.com"
+    }
+  },
+  "profiles": {
+    "default": {
+      "host": "production",
+      "projectId": "00000000-0000-0000-0000-000000000000",
+      "directories": {
+        "exportZips": "/Users/admin/repos/AIP/viber/input",
+        "workspaceRoot": "/Users/admin/repos/AIP/viber/work",
+        "importZips": "/Users/admin/repos/AIP/viber/output"
+      },
+      "apiKey": {
+        "service": "sentione-automate",
+        "username": "default"
+      }
+    }
+  }
+}

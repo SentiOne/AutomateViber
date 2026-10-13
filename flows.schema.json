@@ -1,0 +1,951 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/sentione/flows.schema.json",
+  "title": "SentiOne Automate Flow Schema (Derived From reference-project)",
+  "description": "Schema for files in flows/*.json based on reference/reference-project.zip.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "uuid",
+    "name",
+    "referenceName",
+    "flowVersion",
+    "defaultNluId",
+    "errorHandlingContextRef",
+    "contexts"
+  ],
+  "properties": {
+    "uuid": {
+      "$ref": "#/$defs/uuid"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "referenceName": {
+      "$ref": "#/$defs/uuid"
+    },
+    "flowVersion": {
+      "type": "integer"
+    },
+    "defaultNluId": {
+      "$ref": "#/$defs/uuid"
+    },
+    "errorHandlingContextRef": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "conversationEndingContextRef": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "contexts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/context"
+      }
+    }
+  },
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "uuidOrEmpty": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/uuid"
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ]
+    },
+    "expression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "useJS",
+        "value"
+      ],
+      "properties": {
+        "useJS": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "indexedExpression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "useJS",
+        "value"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "useJS": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "logObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "params"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "params": {
+          "$ref": "#/$defs/expression"
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "left",
+        "type",
+        "right",
+        "operator"
+      ],
+      "properties": {
+        "left": {
+          "$ref": "#/$defs/expression"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "and",
+            "or"
+          ]
+        },
+        "right": {
+          "$ref": "#/$defs/expression"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "==",
+            "!=",
+            ">",
+            "<",
+            ">=",
+            "<="
+          ]
+        }
+      }
+    },
+    "response": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "required": [
+            "_id"
+          ],
+          "properties": {
+            "_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "params"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "params": {
+          "$ref": "#/$defs/expression"
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "conditions"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Regular",
+            "Fallback"
+          ]
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to",
+        "name"
+      ],
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/uuid",
+          "description": "Must match an output.id from some state in this context."
+        },
+        "to": {
+          "$ref": "#/$defs/uuid",
+          "description": "Must match a state.id in this context."
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      }
+    },
+    "conditionalResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "responses",
+        "conditions",
+        "attachments",
+        "quickReplies"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/response"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "attachments": {
+          "type": "array"
+        },
+        "quickReplies": {
+          "type": "array"
+        },
+        "dynamicQuickReplies": {
+          "$ref": "#/$defs/expression"
+        }
+      }
+    },
+    "fallbackResponseVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "responses",
+        "attachments",
+        "quickReplies",
+        "tags"
+      ],
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/response"
+          }
+        },
+        "attachments": {
+          "type": "array"
+        },
+        "quickReplies": {
+          "type": "array"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "toolArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type",
+        "isRequired",
+        "description"
+      ],
+      "properties": {
+        "enum": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isRequired": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "arguments",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/toolArgument"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "delayedMessageConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "messages",
+        "initialDelay"
+      ],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/response"
+          }
+        },
+        "repeatDelay": {
+          "type": "number"
+        },
+        "initialDelay": {
+          "type": "number"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "outputs",
+        "position",
+        "tags"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "start",
+            "say",
+            "say-conditional",
+            "say-fallback",
+            "custom",
+            "conversationMetadata",
+            "log",
+            "empty",
+            "context",
+            "Integration",
+            "say-llm",
+            "llm-integration",
+            "nluModel",
+            "ask",
+            "ApiConnector",
+            "botResponseLanguage",
+            "redirect",
+            "end",
+            "terminate"
+          ]
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/command"
+          }
+        },
+        "conditionalResponses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conditionalResponse"
+          }
+        },
+        "inputParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/expression"
+          }
+        },
+        "memory": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/indexedExpression"
+              }
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "message": {
+          "$ref": "#/$defs/expression"
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/logObject"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/output"
+          }
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "isCollapsed": {
+          "type": "boolean"
+        },
+        "redirect": {
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "$ref": "#/$defs/expression"
+            }
+          ]
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        },
+        "attachments": {
+          "type": "array"
+        },
+        "quickReplies": {
+          "type": "array"
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/response"
+          }
+        },
+        "requestUserInput": {
+          "type": "boolean"
+        },
+        "useNER": {
+          "type": "boolean"
+        },
+        "isEmptyPoint": {
+          "type": "boolean"
+        },
+        "isQuickPoint": {
+          "type": "boolean"
+        },
+        "contextReferenceName": {
+          "$ref": "#/$defs/uuidOrEmpty"
+        },
+        "integrationReferenceName": {
+          "$ref": "#/$defs/uuid"
+        },
+        "requestReferenceName": {
+          "$ref": "#/$defs/uuid"
+        },
+        "outputValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "nluModel": {
+          "type": "string"
+        },
+        "skipResponse": {
+          "type": "boolean"
+        },
+        "isRequestStream": {
+          "type": "boolean"
+        },
+        "logRequestResponse": {
+          "type": "boolean"
+        },
+        "credentialsId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/uuid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "developerMessage": {
+          "type": "string"
+        },
+        "userMessage": {
+          "type": "string"
+        },
+        "responseMemoryPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "logParameters": {
+          "type": "boolean"
+        },
+        "logParametersAndResponse": {
+          "type": "boolean"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tool"
+          }
+        },
+        "toolCallsMemoryPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "toolResultsMemoryPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context": {
+          "type": "string"
+        },
+        "isStream": {
+          "type": "boolean"
+        },
+        "botResponseBuffering": {
+          "type": "string"
+        },
+        "delayedMessageConfig": {
+          "$ref": "#/$defs/delayedMessageConfig"
+        },
+        "previousMessagesContextSize": {
+          "type": "number"
+        },
+        "preserveSession": {
+          "type": "boolean"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "maxTokens": {
+          "type": "number"
+        },
+        "dynamicQuickReplies": {
+          "$ref": "#/$defs/expression"
+        },
+        "fallbackResponses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fallbackResponseVariant"
+          }
+        },
+        "noReplyResponses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fallbackResponseVariant"
+          }
+        },
+        "botResponseLanguage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "variable": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "object"
+        },
+        "servicePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disableAutocorrect": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "log"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "message",
+              "objects"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "context"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "contextReferenceName"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "Integration"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "integrationReferenceName",
+              "requestReferenceName",
+              "outputValues",
+              "nluModel",
+              "useNER",
+              "requestUserInput",
+              "skipResponse",
+              "isRequestStream"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "llm-integration"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "credentialsId",
+              "model",
+              "developerMessage",
+              "userMessage",
+              "responseMemoryPath",
+              "temperature"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "say-llm"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "model",
+              "context",
+              "isStream",
+              "botResponseBuffering",
+              "previousMessagesContextSize"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "nluModel"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "useNER"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "botResponseLanguage"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "botResponseLanguage"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "ask"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "responses",
+              "attachments",
+              "quickReplies",
+              "variable"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "ApiConnector"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "servicePath",
+              "variables"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "say-fallback"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "responses",
+              "attachments",
+              "quickReplies",
+              "requestUserInput",
+              "fallbackResponses",
+              "noReplyResponses"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "redirect"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "redirect": {
+                "$ref": "#/$defs/expression"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "contextModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "states",
+        "transitions"
+      ],
+      "properties": {
+        "uuid": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "array"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "states": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/state"
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/transition"
+          }
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "name",
+        "referenceName",
+        "group",
+        "model"
+      ],
+      "properties": {
+        "uuid": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "referenceName": {
+          "$ref": "#/$defs/uuid"
+        },
+        "group": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "$ref": "#/$defs/contextModel"
+        }
+      }
+    }
+  }
+}

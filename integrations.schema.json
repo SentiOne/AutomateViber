@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/sentione/integrations.schema.json",
+  "title": "SentiOne Automate Integrations Schema (Derived From Reference Exports)",
+  "description": "Schema for integrations.json derived from the reference project exports in this repository.",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/integration"
+  },
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "stringMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "indexedStringMap": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^\\d+$"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "integrationHeader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authType",
+        "name",
+        "value"
+      ],
+      "properties": {
+        "authType": {
+          "type": "string",
+          "enum": [
+            "Plain"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "referenceName",
+        "name",
+        "path",
+        "method",
+        "body",
+        "headers",
+        "queryParams",
+        "customOutputValuesMapping",
+        "inputParameters",
+        "bodyType",
+        "isStream",
+        "streamType",
+        "botResponseMapping",
+        "botResponseBuffering"
+      ],
+      "properties": {
+        "uuid": {
+          "$ref": "#/$defs/uuid"
+        },
+        "referenceName": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "body": {
+          "type": "string"
+        },
+        "headers": {
+          "$ref": "#/$defs/stringMap"
+        },
+        "queryParams": {
+          "$ref": "#/$defs/stringMap"
+        },
+        "customOutputValuesMapping": {
+          "$ref": "#/$defs/stringMap"
+        },
+        "inputParameters": {
+          "$ref": "#/$defs/indexedStringMap"
+        },
+        "bodyType": {
+          "type": "string",
+          "enum": [
+            "Json",
+            "Raw"
+          ]
+        },
+        "isStream": {
+          "type": "boolean"
+        },
+        "streamType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "ServerSentEvents"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "botResponseMapping": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "text"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "botResponseBuffering": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Word"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "integration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uuid",
+        "referenceName",
+        "name",
+        "baseUrl",
+        "requests",
+        "headers",
+        "customTimeout",
+        "inputParameters",
+        "authSettings"
+      ],
+      "properties": {
+        "uuid": {
+          "$ref": "#/$defs/uuid"
+        },
+        "referenceName": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/request"
+          }
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/integrationHeader"
+          }
+        },
+        "customTimeout": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inputParameters": {
+          "$ref": "#/$defs/indexedStringMap"
+        },
+        "authSettings": {
+          "type": "null"
+        }
+      }
+    }
+  }
+}

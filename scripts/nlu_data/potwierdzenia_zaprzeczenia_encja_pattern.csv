@@ -1,0 +1,481 @@
+mtt_no,"# zaprzeczenie
+
+LABEL ar""[,;!?.]"" AS @""interp""
+
+LABEL (ar""nie+$"" | a""nein""|a""najn""|a""nol""|a""no"" ""way""|a""nol"" ""wej""| a""noway""| a""nolwej"" | a""niet"" | a""nie"" ""nie"" | a""nie"" ""nie"" ""nie"" ) AS @""niepierwsze""
+LABEL ^ < 0 , 3> @""niepierwsze"" AS @""start""
+LABEL @""niepierwsze"" IN @""start"" AS @""niepierwsze""
+UNLABEL @""start""
+
+LABEL (a""nie"" a""inaczej"" |
+    a""nie"" a""ma"" a""problemu"" |
+    a""nie"" a""mam"" a""problemu""|
+    a""nie"" a""wiem"") AS @""fp""
+UNLABEL @""niepierwsze"" IN @""fp""
+UNLABEL @""fp""
+
+
+
+LABEL a""chyba"" a""nie"" AS @""chybanie""
+
+LABEL (a""chuja"" | a""uja"" | a""huja"" | a""choja"" | a""hoja"") AS @""chuj""
+
+LABEL (a""no"" a""nie"" | 
+    a""o"" a""nie"" |
+    a""tylko"" a""nie"" a""to"" |
+    (a""absolutnie"") a""nie"" | 
+    a""nie"" (a""teraz"") | 
+    a""nie"" ""w"" ""tej"" ""chwili"" | 
+    a""nie"" a""rob"" (a""tego""|) |
+    a""nie"" ar""dziek"" |
+    ar""dziek"" a""nie"" |
+    (a""no""|) ar""stanowcz"" a""nie"" |
+    (a""no""|) a""nie"" a""mam"" (ar""taki""|) ar""zamiar"" |
+    (a""no""|) a""nie"" a""ma"" a""bata"" |
+    (a""no""|) a""nie"" a""ma"" @""chuj"" |
+    (a""no""|) a""nie"" a""ma"" ar""taki"" |
+    (a""no""|) a""naprawde"" a""nie"" |
+    (a""no""|) a""na"" a""prawde"" a""nie"" |
+    (a""no""|) a""napewno"" a""nie"" |
+    (a""no""|) a""raczej"" a""nie"" |
+    a""na"" a""pewno"" a""nie"" |
+    a""zdecydowanie"" a""nie"" |
+    a""oj"" a""nie"" |
+    a""nie"" a""chce"" |
+    a""nie"" ar""chcial"" |
+    a""w"" a""sumie"" (a""to""|) a""nie"" |
+    a""nie"" a""mam"" a""ochoty"" |
+    a""mysle"" a""ze"" a""nie"" |
+    a""nie"" a""sadze"" |
+    a""jednak"" a""nie"" |
+    a""nie"" a""tym"" a""razem"" |
+    a""niechce"" |
+    a""poki"" a""co"" (a""to"") a""nie"" |
+    (a""teraz""|a""jeszcze""|a""zdecydowanie""|a""niestety""|a""obecnie""|a""wole""|ar""wolal"") a""nie""|
+    a""niezbyt"" |
+    a""nie"" a""ma""|
+    a""nie"" a""potrzebuje"" |
+    a""nie"" a""do"" a""konca""|
+    a""nie"" a""moge"" |
+    a""nie"" a""wogole"" |
+    a""nie"" a""w"" a""ogole""|
+    a""z"" a""tego"" a""co"" (a""wiem""| a""mi"" a""wiadomo"") a""to"" a""nie"") AS @""nieplus""
+UNLABEL @""nieplus"" IN @""nieplus""
+
+LABEL (a""nie"" ""wydaje"" ""mi"" ""sie"") AS @""wydajesie""
+
+LABEL (a""odmawiam"") AS @""odmawiam""
+
+LABEL ((a""no""|) a""nie"" ""ma"" ""mowy"" |
+    (a""no""|) a""nie"" ""ma"" (""takiej""|) ""opcji"" |
+    (a""no""|) a""nie"" (ar""rozwa""|) (ar""taki""|) a""opcji"" ) AS @""niema""
+UNLABEL @""niema"" IN @""niema""
+
+LABEL ((a""no""|) (a""prosze""|) a""bez"" ar""taki"" (a""mi""|) (a""tu""|) ) AS @""beztakich""
+UNLABEL @""beztakich"" IN @""beztakich""
+
+LABEL (^ a""zaprzeczam"" | ^ ar""stanowcz"" a""zaprzeczam"") AS @""zaprzeczam""
+
+LABEL (a""na"" a""to"" | a""nato"" ) AS @""nato"" 
+LABEL (a""na"" a""to"" | a""nato"" | a""sie"" a""na"" a""to"" | a""sie"" a""nato"") AS @""natoexpanded"" 
+
+LABEL  (a""nie"" a""masz"" <0,5> a""zgody"" | 
+    a""nie"" a""zgadzam"" a""sie"" | 
+    a""niezgadzam"" a""sie"" | 
+    a""nie"" ar""wyraz"" (@""natoexpanded""|)  a""zgody"" |
+    a""nie"" a""moge"" a""sie"" <0,3> a""zgodzic"" |
+    a""nie"" a""moge"" (@""natoexpanded""|) a""zgodzic""  |
+    a""sie"" a""nie"" a""zgadzam"" |
+    a""nigdy"" @""nato"" a""nie"" a""zgodze"") AS @""niemaszzgody""
+
+
+LABEL (a""nic"" a""takiego"" | 
+    a""nic"" a""z"" a""tych"" a""rzeczy"" | 
+    a""nic"" a""z"" a""takich"" a""rzeczy"" |
+    a""nic"" a""z"" a""tych"" a""zeczy"" | 
+    a""nic"" a""z"" a""takich"" a""zeczy"" |
+    a""nic"" a""z"" a""tego"" | a""juz"" a""nic"") AS @""nic""
+
+
+
+LABEL ((a""nic""|) a""nie"" ar""potwierdz"" | (a""nic""|) ar""niepotwierdz"") AS @""niepotwierdzam""
+UNLABEL @""niepotwierdzam"" IN @""niepotwierdzam""
+
+LABEL (a""w"" a""zadnym"" a""wypadku"" |
+    a""w"" a""rzadnym"" a""wypadku"" |
+    a""w"" a""zadnym"" a""przypadku"" |
+    a""w"" a""rzadnym"" a""przypadku"" |
+    a""w"" a""zadnym"" a""pszypadku"" |
+    a""w"" a""rzadnym"" a""pszypadku"" ) AS @""zadenwypadek""
+
+
+LABEL ((a""no""|) a""oczywiscie"" a""ze"" a""nie"") AS @""oczywiscienie""
+
+LABEL (a""nie"" a""ma"" (@""nato""|) a""szans"") AS @""szans""
+
+LABEL (^ <0,2> a""ale"" a""nie"") AS @""alenie""
+
+LABEL (a""nie"" a""daj"" (a""mi""|) a""spokoj"" |
+    a""nie"" a""dajcie"" (a""mi""|) a""spokoj"") AS @""spokoj""
+
+LABEL (a""rezygnuje"" | a""rezygnacja"" | a""rezygnuj"") AS @""rezygnacja""
+
+LABEL (a""nigdy"" | a""nigdy"" a""w"" a""zyciu"" | a""nigdy"" a""w"" a""swiecie"") AS @""wzyciu""
+UNLABEL @""wzyciu"" IN @""wzyciu""
+
+LABEL (a""masz"" | a""macie""| a""ma"" | a""bedzie"" | a""bylo"") AS @""temp""
+LABEL (a""nie"" @""temp"" (@""nato""|) a""mojego"" a""przyzwolenia"" |
+    a""nie"" @""temp"" (@""nato""|) a""mojego"" a""pozwolenia"") AS @""przyzwolenie""
+UNLABEL @""temp"" 
+
+LABEL (a""ani"" (a""to""|a""jedno"") a""ani"" (a""to""|a""drugie"")) AS @""anitoanito""
+
+LABEL ((a""alez"" |) a""skadze""| a""alez"" a""skad"") AS @""skadze""
+LABEL a""wcale"" AS @""wcale""
+
+LABEL (a""o"" a""cos"" a""innego"" (a""mi"" |) ar""chodzi""| ar""chodzi"" (a""mi"" |) a""o"" a""cos"" a""innego"") AS @""cosinnego""
+
+LABEL ((a""wolalbym""|a""wolalabym""|a""wole""|a""chce"") ((a""jakos"" |) a""inaczej""| a""w"" a""inny"" a""sposob"" )) AS @""inaczej""
+
+UNLABEL @""interp""
+UNLABEL @""nato"" 
+UNLABEL @""natoexpanded"" 
+UNLABEL @""chuj""
+UNLABEL @""niepierwsze"" IN @""niepierwsze""
+UNLABEL @""niepierwsze"" IN @""przyzwolenie""
+UNLABEL @""niepierwsze"" IN @""niema""
+UNLABEL @""niepierwsze"" IN @""szans""
+UNLABEL @""niepierwsze"" IN @""nieplus""
+UNLABEL @""nieplus"" IN @""niema""
+UNLABEL @""nieplus"" IN @""oczywiscienie""
+UNLABEL @""niepierwsze"" IN @""niemaszzgody""
+UNLABEL @""niepierwsze"" IN @""spokoj""
+UNLABEL @""niepierwsze"" IN @""niepotwierdzam""
+
+
+
+LABEL @""alenie"" AS @""mttzaprzeczenie""
+LABEL @""beztakich"" AS @""mttzaprzeczenie""
+LABEL @""nic"" AS @""mttzaprzeczenie""
+LABEL @""niema"" AS @""mttzaprzeczenie""
+LABEL @""niemaszzgody"" AS @""mttzaprzeczenie""
+LABEL @""niepierwsze"" AS @""mttzaprzeczenie""
+LABEL @""nieplus"" AS @""mttzaprzeczenie""
+LABEL @""niepotwierdzam"" AS @""mttzaprzeczenie""
+LABEL @""oczywiscienie"" AS @""mttzaprzeczenie""
+LABEL @""przyzwolenie"" AS @""mttzaprzeczenie""
+LABEL @""rezygnacja"" AS @""mttzaprzeczenie""
+LABEL @""spokoj"" AS @""mttzaprzeczenie""
+LABEL @""szans"" AS @""mttzaprzeczenie""
+LABEL @""wydajesie"" AS @""mttzaprzeczenie""
+LABEL @""wzyciu"" AS @""mttzaprzeczenie""
+LABEL @""zadenwypadek"" AS @""mttzaprzeczenie""
+LABEL @""zaprzeczam"" AS @""mttzaprzeczenie""
+LABEL @""chybanie"" AS @""mttzaprzeczenie""
+LABEL @""anitoanito"" AS @""mttzaprzeczenie""
+LABEL @""skadze"" AS @""mttzaprzeczenie""
+LABEL @""wcale"" AS @""mttzaprzeczenie""
+LABEL @""cosinnego"" AS @""mttzaprzeczenie""
+LABEL @""inaczej"" AS @""mttzaprzeczenie""
+LABEL @""odmawiam"" AS @""mttzaprzeczenie""
+
+# automatically generated UNLABELs:
+UNLABEL @""alenie""
+UNLABEL @""beztakich""
+UNLABEL @""nic""
+UNLABEL @""niema""
+UNLABEL @""niemaszzgody""
+UNLABEL @""niepierwsze""
+UNLABEL @""nieplus""
+UNLABEL @""niepotwierdzam""
+UNLABEL @""oczywiscienie""
+UNLABEL @""przyzwolenie""
+UNLABEL @""rezygnacja""
+UNLABEL @""spokoj""
+UNLABEL @""szans""
+UNLABEL @""wydajesie""
+UNLABEL @""wzyciu""
+UNLABEL @""zadenwypadek""
+UNLABEL @""zaprzeczam""
+UNLABEL @""chybanie""
+UNLABEL @""anitoanito""
+UNLABEL @""skadze""
+UNLABEL @""wcale""
+UNLABEL @""cosinnego""
+UNLABEL @""inaczej"" 
+ # -- you're welcome
+
+
+UNLABEL @""mttzaprzeczenie"" IN @""mttzaprzeczenie""
+LABEL @""mttzaprzeczenie"" AS @""mtt_no""
+UNLABEL @""mttzaprzeczenie""",,Pattern,[]
+mtt_yes,"# potwierdzenie
+
+LABEL ar""[,;!?.]"" AS @""interp""
+
+# no nie wiem
+LABEL a""nie"" AS @""nie""
+#zmiany 21.04.23 by Maciej Szulim
+LABEL ^ a""no"" $ AS @""no""
+
+LABEL a""no"" a""prosze"" AS @""noplus""
+LABEL a""no"" a""poprosze"" AS @""noplus""
+LABEL a""niech"" a""bedzie"" AS @""niechbedzie""
+LABEL a""no"" a""niech"" a""bedzie"" AS @""niechbedzie""
+LABEL a""ojej"" a""no"" a""dobrze"" AS @""niechbedzie""
+LABEL a""moze"" a""byc"" AS @""niechbedzie""
+LABEL a""niech"" a""zostanie"" AS @""mozebyc""
+LABEL a""pasuje"" a""mi"" AS @""pasuje""
+LABEL a""pasuje"" AS @""pasuje""
+LABEL a""no"" a""dobra"" AS @""mozebyc""
+
+LABEL ^ a""tak"" AS @""takpierwsze""
+
+LABEL ((a""no""|) a""tak"" | (a""oj""|) a""tak"" | (a""no""|) a""ta"" | a""yes"" | a""si"" | a""tak"" a""tak"" | a""tak"" a""tak"" a""tak"") AS @""tak""
+
+LABEL (a""tak"" a""prosze"" | 
+    a""tak"" a""poprosze"" | 
+    a""poprosze"" | 
+    a""tak"" a""napewno"" | 
+    a""tak"" a""na"" a""pewno"" | 
+    a""tak"" a""na"" a""bank"" | 
+    a""tak"" a""wlasnie"" | 
+    a""tak"" a""jest"" | 
+    a""tak"" a""ma"" a""byc"" |
+    a""jesli"" a""tak"" a""sie"" a""da"" |
+    a""jezeli"" a""tak"" a""sie"" a""da"" |
+    @""tak"" (a""bym"" |) ar""wolal"" |
+    @""tak"" a""wole"" |
+    a""wole"" @""tak"" |
+    a""i"" @""tak"" |
+    @""tak"" a""interesuje"") AS @""takplus""
+ 
+LABEL (@""no"" @""nie"" | @""tak"" @""nie"") AS @""fp""
+
+UNLABEL @""nie""
+UNLABEL @""no"" IN @""fp""
+UNLABEL @""tak"" IN @""fp""
+UNLABEL @""takpierwsze"" IN @""fp""
+UNLABEL @""fp""
+
+LABEL ((a""no"" | ) a""wiadomo"" a""ze"" a""tak"" |
+    a""wiadomka"") AS @""wiadomo""
+
+# LABEL (a""tak"" a""o"" a""to"" <0,2> a""chodzi"" |
+#    a""tak"" a""o"" a""to"" <0,2> a""chodzilo"") AS @""otochodzi""
+
+LABEL ((@""tak"" |) a""o"" a""to"" (a""wlasnie""|) (a""mi"" |) ar""chodzi"" |
+    (@""tak"" |) a""wlasnie"" a""o"" a""to"" <0,1> ar""chodzi"" |
+    (@""tak"" |) a""wlasnie"" a""o"" a""to"" <0,1> ar""rozchodzi"" ) AS @""otochodzi""
+
+LABEL (a""o"" a""to"" a""to"" | a""o"" a""to"" a""to"" a""to"") AS @""oto""
+
+LABEL (a""z"" a""pewnoscia"" | a""spewnoscia"" | a""zpewnoscia"") AS @""pewnosc""
+
+
+LABEL (a""ok"" | a""okay"" | a""okej"" | a""okey"" | ar""oke+j"") AS @""ok""
+LABEL ((a""no""|) @""ok"" | a""wyglada"" @""ok"" ) AS @""okplus""
+UNLABEL @""okplus"" IN @""okplus""
+UNLABEL @""ok"" IN @""okplus""
+
+LABEL (a""no""|) (a""jasne"" | a""jaszka"" | a""jacha"" | a""jaha"" | a""pewnie""  | ar""pewka"" | a""oczywiscie"" | a""pewnie"" a""ze"" a""tak"" | a""dobrze"" | a""wiadomo"") AS @""jasne""
+LABEL @""jasne"" <0,1> (a""ze""|) a""nie"" AS @""niejasne""
+UNLABEL @""jasne"" IN @""niejasne""
+UNLABEL @""niejasne""
+
+LABEL ((a""no""|) a""dajesz"" | (a""no""|) ar""dawaj"") AS @""dajesz""
+LABEL ((a""no""|) a""of"" a""course"" | (a""no""|) a""ofcourse"" | (a""no""|) a""ofkourse"" | (a""no""|) a""of"" a""korse"" | (a""no""|) a""of"" a""corse"" | (a""no""|) a""ofkors"") AS @""ofcourse""
+LABEL (a""aha"" | a""acha"") AS @""aha""
+LABEL ((a""tak""|) (a""wyrazam""|) a""zgode"" | (a""tak""|) a""zgoda"" | (a""tak""|) ar""zgadza"" a""sie""  | a""wszystko"" a""sie"" a""zgadza"" | a""masz"" <0,3> a""zgode"") AS @""zgoda""
+LABEL ((a""for""|) a""sure"" | (a""for""|) a""siur"" | (a""for""|) a""siure"" ) AS @""sure""
+
+LABEL ((a""to""|) | (a""byloby""|) | (a""to"" a""byloby""|)) AS @""przerywnik""
+LABEL ((a""no""|) @""przerywnik"" a""spoko"" | (a""no""|) @""przerywnik"" a""spoczko"" | (a""no""|) @""przerywnik"" a""spox"" | (a""no""|) @""przerywnik"" a""spoks"") AS @""spoko""
+UNLABEL @""spoko"" IN @""spoko""
+
+LABEL a""moge"" AS @""moge""
+LABEL (a""nie"" a""moge"" | a""niemoge"") AS @""niemoge""
+UNLABEL @""moge"" IN @""niemoge""
+LABEL (a""pozwalam"" | @""moge"" <0,5> a""pozwolic"" ) AS @""pozwalam""
+UNLABEL @""moge"" IN @""pozwalam""
+UNLABEL @""niemoge""
+
+LABEL (a""dokladnie"") AS @""dokladnie""
+LABEL (@""dokladnie"" a""nie"" a""tak"" | 
+    @""dokladnie"" a""nie"" a""to"" | 
+    @""dokladnie"" a""odwrotnie"" | 
+    @""dokladnie"" a""naodwrot"" | 
+    @""dokladnie"" a""nie"" a""o"" | 
+    @""dokladnie"" a""na"" a""odwrot"") AS @""wykluczenie""
+UNLABEL @""dokladnie"" IN @""wykluczenie""
+UNLABEL @""wykluczenie""
+
+LABEL a""nie"" a""zalezy"" AS @""niezalezy""
+LABEL (@""dokladnie"" a""na"" <0,3> ar""zalez"" | a""tak"" @""dokladnie"" | @""dokladnie"" a""tak"" | @""dokladnie"" @""otochodzi"") AS @""dokladnieplus""
+UNLABEL @""dokladnie"" IN @""dokladnieplus""
+UNLABEL @""otochodzi"" IN @""dokladnieplus""
+UNLABEL @""dokladnieplus"" CONTAINING @""niezalezy""
+
+LABEL (a""na"" <0,3> ar""zalez"") AS @""zalezy""
+UNLABEL @""zalezy"" CONTAINING @""niezalezy""
+UNLABEL @""niezalezy""
+
+LABEL (a""jestem"" | a""bylabym"" | a""bylbym"" | a""bylibysmy"" | a""bylibymy"") AS @""ja""
+LABEL ((a""tak""|) @""ja"" ar""zainteresow"" ) AS @""zainteresowany""
+UNLABEL @""zainteresowany"" IN @""zainteresowany""
+
+LABEL ((a""tak""|) a""zdecydowanie"" (a""tak""|) |
+    (a""tak""|) @""ja"" ar""zdecydowan"") AS @""zdecydowanie""
+
+LABEL (a""zdecydowanie"" a""nie"" (ar""pomogl""|)) AS @""zdecydowanie-fp""
+UNLABEL @""zdecydowanie"" IN @""zdecydowanie-fp""
+UNLABEL @""zdecydowanie-fp""
+UNLABEL @""zdecydowanie"" IN @""zdecydowanie""
+
+UNLABEL @""ja""
+
+LABEL a""owszem"" AS @""owszem""
+
+LABEL ((a""tak"" |) ar""potwierdz"" (a""to""|)) AS @""potwierdzenie""
+UNLABEL @""potwierdzenie"" IN @""potwierdzenie"" 
+
+LABEL (a""no"" a""przeciez"" | a""no"" a""przecie"") AS @""przeciez""
+
+LABEL (a""tak"" ar""potrzeb"") AS @""potrzeba""
+
+LABEL ((a""tak"" |) a""smialo"") AS @""smialo""
+LABEL (a""w"" a""rzeczy"" a""samej"" | a""w"" a""samej"" a""rzeczy"") AS @""wrzeczysamej""
+
+LABEL a""masz"" <0,3> a""przyzwolenie"" AS @""przyzwolenie""
+LABEL (@""tak"" |) a""w"" a""porzadku"" AS @""porzadek""
+LABEL ((a""no""| ) (a""bardzo"" |) a""chetnie"") AS @""chetnie""
+LABEL (a""postaram"" a""sie"") AS @""postarac""
+
+LABEL (a""to"" (a""wlasnie"" |) <0,1> a""na"" a""mysli"") AS @""namysli""
+
+LABEL a""jak"" a""najbardziej"" AS @""najbardziej""
+
+LABEL a""nie"" a""inaczej"" AS @""nieinaczej""
+
+LABEL (@""tak"" |) ar""wyda"" a""mi"" a""sie"" a""ze"" a""tak"" AS @""wydajesie""
+
+LABEL (a""masz"" a""racje"" | a""macie"" a""racje"" | a""racja"") AS @""racja""
+
+LABEL (a""prawidlowo"" | a""poprawnie"") AS @""poprawnie""
+
+UNLABEL @""jasne"" IN @""jasne""
+UNLABEL @""ok"" IN @""ok""
+UNLABEL @""tak"" IN @""tak""
+UNLABEL @""zgoda"" IN @""zgoda""
+UNLABEL @""sure"" IN @""sure""
+UNLABEL @""dajesz"" IN @""dajesz""
+
+UNLABEL @""przerywnik""
+
+
+
+# automatically generated UNLABELs:
+LABEL @""aha"" AS @""mttpotwierdzenie""
+LABEL @""dajesz"" AS @""mttpotwierdzenie""
+LABEL @""dokladnie"" AS @""mttpotwierdzenie""
+LABEL @""jasne"" AS @""mttpotwierdzenie""
+LABEL @""moge"" AS @""mttpotwierdzenie""
+LABEL @""no"" AS @""mttpotwierdzenie""
+LABEL @""ofcourse"" AS @""mttpotwierdzenie""
+LABEL @""ok"" AS @""mttpotwierdzenie""
+LABEL @""okplus"" AS @""mttpotwierdzenie""
+LABEL @""oto"" AS @""mttpotwierdzenie""
+LABEL @""otochodzi"" AS @""mttpotwierdzenie""
+LABEL @""pewnosc"" AS @""mttpotwierdzenie""
+LABEL @""potwierdzenie"" AS @""mttpotwierdzenie""
+LABEL @""pozwalam"" AS @""mttpotwierdzenie""
+LABEL @""przeciez"" AS @""mttpotwierdzenie""
+LABEL @""spoko"" AS @""mttpotwierdzenie""
+LABEL @""sure"" AS @""mttpotwierdzenie""
+LABEL @""tak"" AS @""mttpotwierdzenie""
+LABEL @""takpierwsze"" AS @""mttpotwierdzenie""
+LABEL @""wiadomo"" AS @""mttpotwierdzenie""
+LABEL @""zainteresowany"" AS @""mttpotwierdzenie""
+LABEL @""zdecydowanie"" AS @""mttpotwierdzenie""
+LABEL @""zgoda"" AS @""mttpotwierdzenie""
+LABEL @""potrzeba"" AS @""mttpotwierdzenie""
+LABEL @""smialo"" AS @""mttpotwierdzenie""
+LABEL @""takplus"" AS @""mttpotwierdzenie""
+LABEL @""dokladnieplus"" AS @""mttpotwierdzenie""
+LABEL @""wrzeczysamej"" AS @""mttpotwierdzenie""
+LABEL @""zalezy"" AS @""mttpotwierdzenie""
+LABEL @""przyzwolenie"" AS @""mttpotwierdzenie""
+LABEL @""porzadek"" AS @""mttpotwierdzenie""
+LABEL @""noplus"" AS @""mttpotwierdzenie""
+LABEL @""mozebyc"" AS @""mttpotwierdzenie""
+LABEL @""nodobra"" AS @""mttpotwierdzenie""
+LABEL @""pasuje"" AS @""mttpotwierdzenie""
+LABEL @""niechbedzie"" AS @""mttpotwierdzenie""
+LABEL @""chetnie"" AS @""mttpotwierdzenie""
+LABEL @""owszem"" AS @""mttpotwierdzenie""
+LABEL @""postarac"" AS @""mttpotwierdzenie""
+LABEL @""namysli"" AS @""mttpotwierdzenie""
+LABEL @""najbardziej"" AS @""mttpotwierdzenie""
+LABEL @""nieinaczej"" AS @""mttpotwierdzenie""
+LABEL @""wydajesie"" AS @""mttpotwierdzenie""
+LABEL @""racja"" AS @""mttpotwierdzenie""
+LABEL @""poprawnie"" AS @""mttpotwierdzenie""
+ # -- you're welcome
+
+
+
+# automatically generated UNLABELs:
+UNLABEL @""aha""
+UNLABEL @""dajesz""
+UNLABEL @""dokladnie""
+UNLABEL @""interp""
+UNLABEL @""jasne""
+UNLABEL @""moge""
+UNLABEL @""niemoge""
+UNLABEL @""no""
+UNLABEL @""ofcourse""
+UNLABEL @""ok""
+UNLABEL @""okplus""
+UNLABEL @""oto""
+UNLABEL @""otochodzi""
+UNLABEL @""pewnosc""
+UNLABEL @""potwierdzenie""
+UNLABEL @""pozwalam""
+UNLABEL @""przeciez""
+UNLABEL @""spoko""
+UNLABEL @""sure""
+UNLABEL @""tak""
+UNLABEL @""takpierwsze""
+UNLABEL @""wiadomo""
+UNLABEL @""zainteresowany""
+UNLABEL @""zdecydowanie""
+UNLABEL @""zgoda""
+UNLABEL @""potrzeba""
+UNLABEL @""front""
+UNLABEL @""smialo""
+UNLABEL @""takplus""
+UNLABEL @""dokladnieplus""
+UNLABEL @""wrzeczysamej""
+UNLABEL @""zalezy""
+UNLABEL @""przyzwolenie""
+UNLABEL @""porzadek""
+UNLABEL @""noplus""
+UNLABEL @""mozebyc""
+UNLABEL @""nodobra""
+UNLABEL @""niechbedzie""
+UNLABEL @""pasuje""
+UNLABEL @""chetnie""
+UNLABEL @""owszem""
+UNLABEL @""postarac""
+UNLABEL @""namysli""
+UNLABEL @""najbardziej""
+UNLABEL @""nieinaczej""
+UNLABEL @""wydajesie""
+UNLABEL @""racja""
+UNLABEL @""poprawnie""
+ # -- you're welcome
+
+
+UNLABEL @""mttpotwierdzenie"" IN @""mttpotwierdzenie""
+LABEL ^ @""mttpotwierdzenie"" AS @""mtt_yes""
+UNLABEL @""mttpotwierdzenie""",,Pattern,[]
